@@ -9,7 +9,17 @@ export default function HomePage() {
             <h1>Home Page</h1>
             <p>This is the home page.</p>
             <p>Name from cookie: {name || 'undefined'}</p>
-            <button onClick={() => setName(computeName())}>Change Name</button>
+            <button
+                onClick={() => {
+                    const name = computeName();
+                    const Android = (document as any).Android;
+                    if (Android) {
+                        Android?.showToast(name);
+                    }
+                    setName(name);
+                }}>
+                Change Name
+            </button>
         </div>
     );
 }

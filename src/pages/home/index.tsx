@@ -12,9 +12,9 @@ export default function HomePage() {
             <button
                 onClick={() => {
                     const name = computeName();
-                    const Android = (document as any).Android;
-                    if (Android) {
-                        Android?.showToast(name);
+                    const a = (window as any).Android;
+                    if (a) {
+                        a?.showToast(name);
                     }
                     setName(name);
                 }}>

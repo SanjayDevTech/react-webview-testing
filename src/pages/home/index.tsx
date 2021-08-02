@@ -1,9 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import useCookie from 'react-use-cookie';
 import computeName from '../../names';
 
 export default function HomePage() {
     const [name, setName] = useCookie('name');
+    const history = useHistory();
     return (
         <div>
             <h1>Home Page</h1>
@@ -20,6 +22,7 @@ export default function HomePage() {
                 }}>
                 Change Name
             </button>
+            <button onClick={() => history.push('/second')}>Navigate</button>
         </div>
     );
 }

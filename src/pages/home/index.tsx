@@ -9,7 +9,7 @@ export default function HomePage() {
 
     useEffect(() => {
         const a = window.Android;
-        a?.showToast(JSON.stringify(a));
+        a?.showToast(a?.deviceId, a?.getDeviceId?.());
     }, []);
 
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import useCookie from 'react-use-cookie';
 import computeName from '../../names';
@@ -7,15 +7,16 @@ export default function HomePage() {
     const [name, setName] = useCookie('name');
     const history = useHistory();
 
-    useEffect(() => {
-        const a = window.Android;
-        a?.showToast(a?.getDeviceId());
-    }, []);
+    const deviceId: string | undefined = useMemo(
+        () => window.Android?.getDeviceId?.(),
+        [],
+    );
 
     return (
         <div>
             <h1>Home Page</h1>
             <p>This is the home page.</p>
+            {deviceId && <p> Device id: {deviceId}</p>}
             <p>Name from cookie: {name || 'undefined'}</p>
             <button
                 onClick={() => {

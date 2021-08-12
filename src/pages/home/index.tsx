@@ -1,16 +1,23 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useCookie from 'react-use-cookie';
 import computeName from '../../names';
 
 export default function HomePage() {
+    const [file, setFile] = useState<File>();
     const [name, setName] = useCookie('name');
     const history = useHistory();
 
     const deviceId: string | undefined = useMemo(
-        () => window.Android?.getDeviceId?.(),
+        () => window.Android?.getDeviceId(),
         [],
     );
+
+    useEffect(() => {
+        if (!file) return;
+        console.log(file.name);
+        window.Android?.showToast(file.name);
+    }, [file]);
 
     return (
         <div>
@@ -28,6 +35,7 @@ export default function HomePage() {
                 Change Name
             </button>
             <button onClick={() => history.push('/second')}>Navigate</button>
+            <input type='file' onChange={(e) => setFile(e.target.files?.[0])} />
         </div>
     );
 }

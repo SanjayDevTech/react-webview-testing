@@ -35,7 +35,12 @@ export default function HomePage() {
                 Change Name
             </button>
             <button onClick={() => history.push('/second')}>Navigate</button>
-            <input type='file' onChange={(e) => setFile(e.target.files?.[0])} />
+            <input
+                type='file'
+                multiple
+                accept={'image/*, text/html'}
+                onChange={(e) => setFile(e.target.files?.[0])}
+            />
         </div>
     );
 }
